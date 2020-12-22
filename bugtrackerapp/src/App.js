@@ -43,7 +43,6 @@ class App extends React.Component {
       this.setState({
         bugsArray:tempBugsArray
       })
-     
     })
     
     
@@ -51,32 +50,58 @@ class App extends React.Component {
     
     }
 
-   hello = () =>{
-    console.log(this.state.bugsArray)
+   mapsListOfBugs = () =>{
     return(
-     
-      <div>
-        {this.state.bugsArray.map((array) =>{
-        return(<div>{array['Completed']}
-        {array['Description']}</div>)
-      })}</div>
+      <div><h1>Toipcs</h1>
+      <ul>
+        {this.state.bugsArray.map(({ID,Title}) => (
+          <li key = {ID}>
+            <Link to =  {`/bugsIssue/${ID}`}>{Title}</Link>
+          </li>
+        ))}
+      </ul>
+      </div>
     )
+  }
+
+   descriptionOfBug = ({match}) => {
+// If I don't throw it into a try catch, there seems to be a bug if I reload on one 
+// of the issues
+try{
+  var topic = this.state.bugsArray.find(({ID}) => ID == match.params.ID)
+    
+    return (
+      <div>
+      <div>{topic['ID']}</div>
+      <div>{topic['Title']}</div>
+      </div>
+    )
+}
+catch{
+  return(
+<div>nvm</div>
+  )
+
+}
+
+  
+    
   }
 
    
 
   render(){
-   
     return (
-    
       <Router>
         <ul>
           <li><Link to = "/">Home</Link></li>
           <li><Link to = "/bugs">topics</Link></li>
         </ul>
         <hr />
-        <Route path = {"/bugs"} component = {this.hello}></Route>
+        <Route path = {"/bugs"} component = {this.mapsListOfBugs}></Route>
+        
 
+        <Route path = {`/bugsIssue/:ID`} component = {this.descriptionOfBug}></Route>
       </Router>
      );
   }
