@@ -1,6 +1,7 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
 import { render } from '@testing-library/react';
+import PaginatedTable from './table';
 import {
   BrowserRouter as Router,
   Switch,
@@ -50,9 +51,11 @@ class App extends React.Component {
     
     }
 
-   mapsListOfBugs = () =>{
+   mapsListOfBugs = () => {
     return(
-      <div><h1>Toipcs</h1>
+      <div>
+        
+        <h1>Topics</h1>
       <ul>
         {this.state.bugsArray.map(({ID,Title}) => (
           <li key = {ID}>
@@ -102,6 +105,7 @@ catch{
         
 
         <Route path = {`/bugsIssue/:ID`} component = {this.descriptionOfBug}></Route>
+      <PaginatedTable data = {this.state.bugsArray}/>
       </Router>
      );
   }
