@@ -21,7 +21,10 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      bugsArray: []
+      bugsArray: [{"Completed":1,
+                  "Description": "hi",
+                  "ID": 4,
+                  "Title":"Title"}]
     }
   }
 

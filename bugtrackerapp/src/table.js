@@ -1,8 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 export default function PaginatedTable(props) {
-    console.log(props.data[0]["Completed"])
+  const[count, setCount] = useState([{"Completed":1,
+  "Description": "hi",
+  "ID": 4,
+  "Title":"Title"}])
+
+  useEffect(() => {
+    setCount(props.data)
+  })
+  
+  console.log(props.data)
   return (
-   <div>{props[0]}</div>
+   <div>
+     <table>
+       <tr>
+         <th>Title</th>
+         <th>Description</th>
+         <th>Status</th>
+       </tr>
+       {props.data.map((index) => ((
+         <tr>
+         <td>{index["Title"]}</td>
+        
+         <td>{index["Completed"]}</td>
+
+         </tr>
+         )))}
+     </table>
+   </div>
   );
 }
