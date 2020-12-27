@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-
+import './tablestyle.css'
 export default function PaginatedTable(props) {
   const[count, setCount] = useState([{"Completed":1,
   "Description": "hi",
@@ -22,7 +22,7 @@ export default function PaginatedTable(props) {
        {props.data.map((index) => ((
          <tr>
          <td>{index["Title"]}</td>
-        
+         <td>{index['Description']}</td>
          <td>{index["Completed"]}</td>
 
          </tr>

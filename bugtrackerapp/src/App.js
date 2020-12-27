@@ -6,7 +6,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useRouteMatch
 } from "react-router-dom";
  
 
@@ -23,7 +24,7 @@ class App extends React.Component {
     this.state = {
       bugsArray: [{"Completed":1,
                   "Description": "hi",
-                  "ID": 4,
+                  "ID": 0,
                   "Title":"Title"}]
     }
   }
@@ -55,61 +56,81 @@ class App extends React.Component {
     }
 
    mapsListOfBugs = () => {
+    
     return(
       <div>
-        
+         <PaginatedTable data = {this.state.bugsArray}/>
         <h1>Topics</h1>
       <ul>
         {this.state.bugsArray.map(({ID,Title}) => (
           <li key = {ID}>
-            <Link to =  {`/bugsIssue/${ID}`}>{Title}</Link>
+            <Link to =  {`/bugsIssues/${ID}`}>{Title}</Link>
           </li>
         ))}
       </ul>
+
+      
+      
+    
       </div>
     )
   }
 
    descriptionOfBug = ({match}) => {
-// If I don't throw it into a try catch, there seems to be a bug if I reload on one 
-// of the issues
-try{
   var topic = this.state.bugsArray.find(({ID}) => ID == match.params.ID)
+    console.log(topic);
+    try{
+      return(
+        <div>{topic["Description"]}</div>
+      )
+    } catch{
+      return(
+        <div>
+          hi
+        </div>
+      )
+    }
     
-    return (
-      <div>
-      <div>{topic['ID']}</div>
-      <div>{topic['Title']}</div>
-      </div>
-    )
-}
-catch{
-  return(
-<div>nvm</div>
-  )
 
-}
 
   
     
+  }
+  Home = () => {
+    return(
+      <div>hi there</div>
+    )
+  }
+
+  Home2 = () =>{
+    return(<div>sigh</div>)
   }
 
    
 
   render(){
     return (
+      <div>
       <Router>
         <ul>
           <li><Link to = "/">Home</Link></li>
           <li><Link to = "/bugs">topics</Link></li>
+         
         </ul>
         <hr />
+       <Switch>
+     
         <Route path = {"/bugs"} component = {this.mapsListOfBugs}></Route>
+        <Route exact path="/" component = {this.Home}></Route>
+        <Route path = {`/bugsIssues/:ID`} component = {this.descriptionOfBug}></Route>
+      
+        </Switch>
+           
         
-
-        <Route path = {`/bugsIssue/:ID`} component = {this.descriptionOfBug}></Route>
-      <PaginatedTable data = {this.state.bugsArray}/>
+       
+     
       </Router>
+      </div>
      );
   }
   
