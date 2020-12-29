@@ -17,7 +17,7 @@ import {
   )
  }
 
-
+// New Idea: Title ,Type, Status, Priority, and Description, 
 class App extends React.Component {
   constructor(props){
     super(props);
@@ -68,11 +68,7 @@ class App extends React.Component {
           </li>
         ))}
       </ul>
-
-      
-      
-    
-      </div>
+    </div>
     )
   }
 
@@ -82,6 +78,7 @@ class App extends React.Component {
     try{
       return(
         <div>{topic["Description"]}</div>
+        
       )
     } catch{
       return(
