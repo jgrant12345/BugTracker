@@ -1,4 +1,5 @@
 import './App.css';
+import BugReport from  './BugReport'
 import React, {useState, useEffect} from 'react';
 import { render } from '@testing-library/react';
 import PaginatedTable from './table';
@@ -18,11 +19,11 @@ import {
  }
 
 // New Idea: Title ,Type, Status, Priority, and Description, 
-class App extends React.Component {
+ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      bugsArray: [{"Completed":1,
+      bugsArray: [{"Completed": 1,
                   "Description": "hi",
                   "ID": 0,
                   "Title":"Title"}]
@@ -86,9 +87,10 @@ class App extends React.Component {
   
     
   }
+  // component that will post the bug reports
   BugReport = () => {
     return(
-      <div>Bug ReportBug</div>
+      <div><BugReport /></div>
     )
   }
 
