@@ -30,62 +30,55 @@ class App extends React.Component {
   }
 
     componentDidMount =() => {
-    fetch("/test")
-    .then(response => response.json())
-    .then(data => {
-     
-     var tempBugsArray = [];
-     for(var index in data){
-       var object = {
-         "Completed": data[index]["Completed"],
-         "Description": data[index]["Description"],
-         "ID": data[index]["ID"],
-         "Title": data[index]["Title"]
-       }
-       tempBugsArray.push(object)
-     }
-      
-      this.setState({
-        bugsArray:tempBugsArray
-      })
-    })
-    
-    
-  
-    
+      fetch("/test")
+      .then(response => response.json())
+      .then(data => {
+        var tempBugsArray = [];
+        for(var index in data){
+          var object = {
+            "Completed": data[index]["Completed"],
+            "Description": data[index]["Description"],
+            "ID": data[index]["ID"],
+            "Title": data[index]["Title"]
+          }
+          tempBugsArray.push(object)
+        }
+          
+          this.setState({
+            bugsArray:tempBugsArray
+          })
+        })
     }
-
+    // in the topics directory, it lists the posted bugs
    mapsListOfBugs = () => {
-    
     return(
       <div>
-         <PaginatedTable data = {this.state.bugsArray}/>
+        <PaginatedTable data = {this.state.bugsArray}/>
         <h1>Topics</h1>
-      <ul>
-        {this.state.bugsArray.map(({ID,Title}) => (
-          <li key = {ID}>
-            <Link to =  {`/bugsIssues/${ID}`}>{Title}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+        <ul>
+          {this.state.bugsArray.map(({ID,Title}) => (
+            <li key = {ID}>
+              <Link to =  {`/bugsIssues/${ID}`}>{Title}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     )
   }
-
-   descriptionOfBug = ({match}) => {
+  // When users click on the bug link, this will further explain the bug in detail
+  descriptionOfBug = ({match}) => {
+    // topic uses the IDs to find the directory that the bug description is located in 
   var topic = this.state.bugsArray.find(({ID}) => ID == match.params.ID)
-    console.log(topic);
     try{
       return(
-        <div>{topic["Description"]}</div>
-        
+        <div>{topic["Description"]}</div> 
       )
-    } catch{
-      return(
-        <div>
-          hi
-        </div>
-      )
+    } catch {
+        return(
+          <div>
+            hi
+          </div>
+        )
     }
     
 
@@ -93,9 +86,9 @@ class App extends React.Component {
   
     
   }
-  Home = () => {
+  BugReport = () => {
     return(
-      <div>hi there</div>
+      <div>Bug ReportBug</div>
     )
   }
 
@@ -112,20 +105,15 @@ class App extends React.Component {
         <ul>
           <li><Link to = "/">Home</Link></li>
           <li><Link to = "/bugs">topics</Link></li>
-         
+          <li><Link to = "/ReportBug">ReportBug</Link></li>
         </ul>
         <hr />
-       <Switch>
-     
-        <Route path = {"/bugs"} component = {this.mapsListOfBugs}></Route>
-        <Route exact path="/" component = {this.Home}></Route>
-        <Route path = {`/bugsIssues/:ID`} component = {this.descriptionOfBug}></Route>
-      
+        <Switch>
+          <Route path = {"/bugs"} component = {this.mapsListOfBugs}></Route>
+          <Route path = {"/ReportBug"} component = {this.BugReport}></Route>
+          <Route exact path="/" component = {this.Home}></Route>
+          <Route path = {`/bugsIssues/:ID`} component = {this.descriptionOfBug}></Route>
         </Switch>
-           
-        
-       
-     
       </Router>
       </div>
      );
