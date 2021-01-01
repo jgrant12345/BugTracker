@@ -20,11 +20,29 @@ class BugReport extends React.Component{
     }
 
     handleSubmit = (event) => {
-    var JSONObject = {Title: this.state.Title,
-                    Description: this.state.Description}
-        console.log(JSONObject)
-
+    var data = {Title: this.state.Title,
+                    Description: this.state.Description,
+                Completed: 0}
+    
+        console.log(data)
+    
         // where I should put my fetch 
+        fetch('/send',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error("Error: ", error)
+        })
+
+
         event.preventDefault();
     }
 

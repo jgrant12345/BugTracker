@@ -55,14 +55,6 @@ import {
     return(
       <div>
         <PaginatedTable data = {this.state.bugsArray}/>
-        <h1>Topics</h1>
-        <ul>
-          {this.state.bugsArray.map(({ID,Title}) => (
-            <li key = {ID}>
-              <Link to =  {`/bugsIssues/${ID}`}>{Title}</Link>
-            </li>
-          ))}
-        </ul>
       </div>
     )
   }
