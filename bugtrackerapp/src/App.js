@@ -2,7 +2,7 @@ import './App.css';
 import BugReport from  './BugReport'
 import React, {useState, useEffect} from 'react';
 import { render } from '@testing-library/react';
-import PaginatedTable from './table';
+import PaginatedTable from './PaginateTable';
 import {
   BrowserRouter as Router,
   Switch,
