@@ -12,12 +12,6 @@ import {
 } from "react-router-dom";
  
 
- function hi() {
-  return(
-    <div>hello</div>
-  )
- }
-
 // New Idea: Title ,Type, Status, Priority, and Description, 
  class App extends React.Component {
   constructor(props){
@@ -26,7 +20,8 @@ import {
       bugsArray: [{"Completed": 1,
                   "Description": "hi",
                   "ID": 0,
-                  "Title":"Title"}]
+                  "Title":"Title"}],
+      isCheckBoxChecked: false
     }
   }
 
@@ -43,8 +38,7 @@ import {
             "Title": data[index]["Title"]
           }
           tempBugsArray.push(object)
-        }
-          
+        }        
           this.setState({
             bugsArray:tempBugsArray
           })
@@ -58,13 +52,29 @@ import {
       </div>
     )
   }
+
+
+
+onClickCheckBox = (event) => {
+  console.log(event)
+}
+
+
+
   // When users click on the bug link, this will further explain the bug in detail
   descriptionOfBug = ({match}) => {
     // topic uses the IDs to find the directory that the bug description is located in 
   var topic = this.state.bugsArray.find(({ID}) => ID == match.params.ID)
     try{
       return(
-        <div>{topic["Description"]}</div> 
+        <div>{topic["Description"]}
+          {/* Will check if bug is completed or not */}
+          <input 
+            type = "checkbox" 
+            defaultChecked = {(this.state.isCheckBoxChecked) ? 1: 0} 
+            onClick = {this.onClickCheckBox}
+          />
+        </div> 
       )
     } catch {
         return(
@@ -73,24 +83,8 @@ import {
           </div>
         )
     }
-    
-
-
-  
-    
-  }
-  // component that will post the bug reports
-  BugReport = () => {
-    return(
-      <div><BugReport /></div>
-    )
   }
 
-  Home2 = () =>{
-    return(<div>sigh</div>)
-  }
-
-   
 
   render(){
     return (

@@ -22,16 +22,17 @@ export default function PaginatedTable(props) {
   })
 
   function increment() {
-    if(page <= props.data.length ){
-      console.log("page =",page)
-      setPage(page+1);
+    var lastPage = Math.ceil((props.data.length / sliceBy))
+    if(page <= props.data.length - sliceBy - 1){
+      console.log("page = ",page)
+      setPage(page+sliceBy);
     }
    
   } 
 
   function Decrement() {
     if(page > 0){
-      setPage(page-1);
+      setPage(page-sliceBy);
     }
     
   } 
@@ -53,7 +54,7 @@ export default function PaginatedTable(props) {
         </tr>
       )))}
     </table>
-        <button onClick = {() =>Decrement()}>Before</button>
+        <button onClick = {() => Decrement()}>Before</button>
         <button onClick = {() => increment()}>Next</button>
 
    </div>
