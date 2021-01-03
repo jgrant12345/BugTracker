@@ -1,5 +1,5 @@
 import './App.css';
-import BugReport from  './BugReport'
+import BugReport from './BugReport'
 import React, {useState, useEffect} from 'react';
 import { render } from '@testing-library/react';
 import PaginatedTable from './PaginateTable';
@@ -55,8 +55,9 @@ import {
 
 
 
-onClickCheckBox = (event) => {
-  console.log(event)
+ onClickCheckBox(checked){
+  console.log(checked)
+  
 }
 
 
@@ -65,21 +66,28 @@ onClickCheckBox = (event) => {
   descriptionOfBug = ({match}) => {
     // topic uses the IDs to find the directory that the bug description is located in 
   var topic = this.state.bugsArray.find(({ID}) => ID == match.params.ID)
+  var boxIsChecked = this.state.bugsArray.find(({ID}) => ID == match.params.ID)
+
+  var x = 24
     try{
+      var checked = boxIsChecked["Completed"]
+      
+      
       return(
-        <div>{topic["Description"]}
+        <div>
+          {topic["Description"]}
           {/* Will check if bug is completed or not */}
           <input 
             type = "checkbox" 
-            defaultChecked = {(this.state.isCheckBoxChecked) ? 1: 0} 
-            onClick = {this.onClickCheckBox}
+            defaultChecked = {(checked) ? 1: 0} 
+            onClick = {() =>this.onClickCheckBox(boxIsChecked)}
           />
         </div> 
       )
     } catch {
         return(
           <div>
-            hi
+            There is an error check the function descripitonOfBug in the App.js file
           </div>
         )
     }
@@ -98,7 +106,7 @@ onClickCheckBox = (event) => {
         <hr />
         <Switch>
           <Route path = {"/bugs"} component = {this.mapsListOfBugs}></Route>
-          <Route path = {"/ReportBug"} component = {this.BugReport}></Route>
+          <Route path = {"/ReportBug"} component = {BugReport}></Route>
           <Route exact path="/" component = {this.Home}></Route>
           <Route path = {`/bugsIssues/:ID`} component = {this.descriptionOfBug}></Route>
         </Switch>
