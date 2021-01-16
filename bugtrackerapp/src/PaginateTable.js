@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './tablestyle.css'
+import './tablestyle.css' 
 import {
   BrowserRouter as Router,
   Switch,
@@ -40,18 +40,23 @@ export default function PaginatedTable(props) {
   
   return (
    <div>
-    <table>
+    <table className = "contentTable">
       {/* The headers of the table */}
-      <tr>
+      <thead>
+      <tr className = "TableRow">
         <th>Title</th>
         <th>Description</th>
         <th>Status</th>
       </tr>
+      </thead>
       {Issues.slice(page,page+sliceBy).map(({Description,ID,Title, Completed}) => ((
-        <tr>
+        <tbody>
+        <tr className = "TableRowBody">
           <td> <Link to =  {`/bugsIssues/${ID}`}>{Title}</Link></td>
+          <td className = "Description">{Description}</td>
           <td>{Completed}</td>
         </tr>
+        </tbody>
       )))}
     </table>
         <button onClick = {() => Decrement()}>Before</button>

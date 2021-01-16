@@ -55,9 +55,7 @@ import {
 
 
 
- onClickCheckBox(checked,topic){
-  console.log(checked)
-  console.log("not checked", checked)
+ onClickCheckBox(checked,topic) {
   var ID = topic['ID']
 
   // TODO: call put here to update database of change in completion of task
@@ -66,7 +64,7 @@ import {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({"Completed":!checked['Completed'],
+    body: JSON.stringify({"Completed": !checked['Completed'],
     "ID": ID}),
   })
   .then(response => response.json())
@@ -74,6 +72,7 @@ import {
     console.log(data)
   })
   .catch((error) => console.log("Error: ", error))
+  document.location.reload()
 }
 
 
@@ -83,8 +82,6 @@ import {
     // topic uses the IDs to find the directory that the bug description is located in 
     var topic = this.state.bugsArray.find(({ID}) => ID == match.params.ID)
     var boxIsChecked = this.state.bugsArray.find(({ID}) => ID == match.params.ID)
-
-  var x = 24
     try{
       var checked = boxIsChecked["Completed"]
       return(
@@ -94,7 +91,7 @@ import {
           <input 
             type = "checkbox" 
             defaultChecked = {(checked) ? 1: 0} 
-            onClick = {() =>this.onClickCheckBox(boxIsChecked, topic)}
+            onClick = {() => this.onClickCheckBox(boxIsChecked, topic)}
           />
         </div> 
       )

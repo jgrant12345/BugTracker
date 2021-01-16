@@ -1,6 +1,39 @@
+.contentTable{
+  border-collapse: collapse;
+  margin: 25px 0;
+ font-size: 0.9em;
 
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
+.TableRow{
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.contentTable th,
+.contentTable td{
+  padding: 12px 15px;
+}
+
+.contentTable tbody tr{
+  border-bottom: 1px solid #dddddd;
+ 
+}
+
+.contentTable tbody:nth-child(2n){
+  background-color: #f3f3f3;
+}
+
+.contentTable tbody:last-of-type{
+  border-bottom: 2px solid #009879;
+}
+
+.Description{
+  width : 100px;
+  overflow:hidden;
+  display:inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
