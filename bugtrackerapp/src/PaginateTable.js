@@ -12,7 +12,7 @@ import { Title } from '@material-ui/icons';
 export default function PaginatedTable(props) {
   const[Issues, setIssues] = useState([{"Completed":0,
   "Description": "hi",
-  "ID": 1,
+  "_id": 1,
   "Title":"Title"}])
   const[page, setPage] = useState(0)
   const[sliceBy,setSliceBy] = useState(6)
@@ -49,10 +49,10 @@ export default function PaginatedTable(props) {
         <th>Status</th>
       </tr>
       </thead>
-      {Issues.slice(page,page+sliceBy).map(({Description,ID,Title, Completed}) => ((
+      {Issues.slice(page,page+sliceBy).map(({Description,_id,Title, Completed}) => ((
         <tbody>
         <tr className = "TableRowBody">
-          <td> <Link to =  {`/bugsIssues/${ID}`}>{Title}</Link></td>
+          <td> <Link to =  {`/bugsIssues/${_id}`}>{Title}</Link></td>
           <td className = "Description">{Description}</td>
           <td>{Completed}</td>
         </tr>

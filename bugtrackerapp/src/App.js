@@ -19,14 +19,14 @@ import {
     this.state = {
       bugsArray: [{"Completed": 1,
                   "Description": "hi",
-                  "ID": 0,
+                  "_id": 0,
                   "Title":"Title"}],
       isCheckBoxChecked: false
     }
   }
 
-    componentDidMount =() => {
-      fetch("/test")
+    componentDidMount = () => {
+      fetch("/posts")
       .then(response => response.json())
       .then(data => {
         var tempBugsArray = [];
@@ -34,7 +34,7 @@ import {
           var object = {
             "Completed": data[index]["Completed"],
             "Description": data[index]["Description"],
-            "ID": data[index]["ID"],
+            "_id": data[index]["_id"],
             "Title": data[index]["Title"]
           }
           tempBugsArray.push(object)
@@ -56,23 +56,23 @@ import {
 
 
  onClickCheckBox(checked,topic) {
-  var ID = topic['ID']
+  var _id = topic['_id']
 
   // TODO: call put here to update database of change in completion of task
-  fetch("/update", {
-    method: "PUT",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({"Completed": !checked['Completed'],
-    "ID": ID}),
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data)
-  })
-  .catch((error) => console.log("Error: ", error))
-  document.location.reload()
+  // fetch("/update", {
+  //   method: "PUT",
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify({"Completed": !checked['Completed'],
+  //   "_id": _id}),
+  // })
+  // .then(response => response.json())
+  // .then(data => {
+  //   console.log(data)
+  // })
+  // .catch((error) => console.log("Error: ", error))
+  // document.location.reload()
 }
 
 
@@ -80,9 +80,10 @@ import {
   // When users click on the bug link, this will further explain the bug in detail
   descriptionOfBug = ({match}) => {
     // topic uses the IDs to find the directory that the bug description is located in 
-    var topic = this.state.bugsArray.find(({ID}) => ID == match.params.ID)
-    var boxIsChecked = this.state.bugsArray.find(({ID}) => ID == match.params.ID)
+    var topic = this.state.bugsArray.find(({_id}) => _id == match.params._id)
+    var boxIsChecked = this.state.bugsArray.find(({_id}) => _id == match.params._id)
     try{
+      console.log(topic)
       var checked = boxIsChecked["Completed"]
       return(
         <div>
@@ -119,7 +120,7 @@ import {
           <Route path = {"/bugs"} component = {this.mapsListOfBugs}></Route>
           <Route path = {"/ReportBug"} component = {BugReport}></Route>
           <Route exact path="/" component = {this.Home}></Route>
-          <Route path = {`/bugsIssues/:ID`} component = {this.descriptionOfBug}></Route>
+          <Route path = {`/bugsIssues/:_id`} component = {this.descriptionOfBug}></Route>
         </Switch>
       </Router>
       </div>
