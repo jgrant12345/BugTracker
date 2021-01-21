@@ -59,20 +59,20 @@ import {
   var _id = topic['_id']
 
   // TODO: call put here to update database of change in completion of task
-  // fetch("/update", {
-  //   method: "PUT",
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({"Completed": !checked['Completed'],
-  //   "_id": _id}),
-  // })
-  // .then(response => response.json())
-  // .then(data => {
-  //   console.log(data)
-  // })
-  // .catch((error) => console.log("Error: ", error))
-  // document.location.reload()
+  fetch(`/posts/${_id}`, {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({"Completed": !checked['Completed'],
+    "_id": _id}),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+  })
+  .catch((error) => console.log("Error: ", error))
+  document.location.reload()
 }
 
 
@@ -98,9 +98,7 @@ import {
       )
     } catch {
         return(
-          <div>
-            There is an error check the function descripitonOfBug in the App.js file
-          </div>
+          <div></div>
         )
     }
   }
