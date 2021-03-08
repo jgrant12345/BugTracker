@@ -3,6 +3,7 @@ import BugReport from './BugReport'
 import React, {useState, useEffect} from 'react';
 import { render } from '@testing-library/react';
 import PaginatedTable from './PaginateTable';
+import Modal from './Components/Modal'
 import {
   BrowserRouter as Router,
   Switch,
@@ -58,7 +59,7 @@ import {
  onClickCheckBox(checked,topic) {
   var _id = topic['_id']
 
-  // TODO: call put here to update database of change in completion of task
+  // call put here to update database of change in completion of task
   fetch(`/posts/${_id}`, {
     method: "PATCH",
     headers: {
@@ -112,6 +113,7 @@ import {
           <li><Link to = "/">Home</Link></li>
           <li><Link to = "/bugs">topics</Link></li>
           <li><Link to = "/ReportBug">ReportBug</Link></li>
+          <li><Link to = "/test">test</Link></li>
         </ul>
         <hr />
         <Switch>

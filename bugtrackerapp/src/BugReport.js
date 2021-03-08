@@ -21,13 +21,13 @@ class BugReport extends React.Component{
 
     handleSubmit = (event) => {
     var data = {Title: this.state.Title,
-                    Description: this.state.Description,
+                Description: this.state.Description,
                 Completed: 0}
     
         console.log(data)
     
         // where I should put my fetch 
-        fetch('/send',{
+        fetch('/posts',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
