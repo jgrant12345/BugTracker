@@ -37,3 +37,17 @@
   white-space: nowrap;
 }
 
+
+.TitleInputBox{
+  display: block;
+  height: 40px;
+}
+
+
+.DescriptionSize {
+  height: 200px;
+  width: 300px;
+  padding: 5px;
+}
+
+

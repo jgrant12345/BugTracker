@@ -3,7 +3,8 @@ import BugReport from './BugReport'
 import React, {useState, useEffect} from 'react';
 import { render } from '@testing-library/react';
 import PaginatedTable from './PaginateTable';
-import Modal from './Components/Modal'
+import Modal2 from './Components/Modal';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -49,7 +50,8 @@ import {
    mapsListOfBugs = () => {
     return(
       <div>
-        <PaginatedTable data = {this.state.bugsArray}/>
+        <PaginatedTable data = {this.state.bugsArray}/>  
+        <Modal2/>
       </div>
     )
   }
@@ -118,6 +120,7 @@ import {
         <hr />
         <Switch>
           <Route path = {"/bugs"} component = {this.mapsListOfBugs}></Route>
+          <Route path = {"/test"} component = {Modal2}></Route>
           <Route path = {"/ReportBug"} component = {BugReport}></Route>
           <Route exact path="/" component = {this.Home}></Route>
           <Route path = {`/bugsIssues/:_id`} component = {this.descriptionOfBug}></Route>
