@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './tablestyle.css' 
 class BugReport extends React.Component{
     constructor(props){
         super(props);
@@ -50,13 +50,13 @@ class BugReport extends React.Component{
     render(){
         return(
            <form onSubmit = {this.handleSubmit}>
-               <label>
+               <label className = "TitleInputBox">
                    Title
-                   <input type = "text" value = {this.state.Title} onChange = {this.handleChangeTitle} />
+                   <input type = "text"  value = {this.state.Title} onChange = {this.handleChangeTitle} />
                </label>
                <label>
                    Description
-                   <input type = "text" value = {this.state.Description} onChange = {this.handleChangeDescription} />
+                   <textarea  className = "DescriptionSize" value = {this.state.Description} onChange = {this.handleChangeDescription} />
                </label>
                <input type = "submit" value = "Submit" />
            </form>
